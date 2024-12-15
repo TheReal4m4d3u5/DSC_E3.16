@@ -15,7 +15,10 @@ b. Find all employees in the database who live in the same cities as the compani
 
 c. Find all employees in the database who live in the same cities and on the same streets as do their managers.
 
+d. Find all employees who earn more than the average salary of all employees of their company.
 
-![alt text](image.png)
+e. Find the company that has the smallest payroll.
 
-![alt text](image-1.png)
+![alt text](image-3.png)
+
+![alt text](image-4.png)

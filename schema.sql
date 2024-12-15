@@ -68,14 +68,12 @@ INSERT INTO Manages (employee_name, manager_name) VALUES
 
 
 -- a. Find the names of all employees who work for “First Bank Corporation.”
-
 SELECT E.employee_name
 FROM Employee E
 JOIN Works W ON E.employee_name = W.employee_name
 WHERE W.company_name = 'First Bank Corporation';
 
 -- b. Find all employees in the database who live in the same cities as the companies for which they work.
-
 SELECT E.employee_name
 FROM Employee E
 JOIN Works W ON E.employee_name = W.employee_name
@@ -83,9 +81,24 @@ JOIN Company C ON W.company_name = C.company_name
 WHERE E.city = C.city;
 
 -- c. Find all employees in the database who live in the same cities and on the same streets as do their managers.
-
 SELECT E.employee_name
 FROM Employee E
 JOIN Manages M ON E.employee_name = M.employee_name
 JOIN Employee Mgr ON M.manager_name = Mgr.employee_name
 WHERE E.city = Mgr.city AND E.street = Mgr.street;
+
+-- d. Find all employees who earn more than the average salary of all employees of their company.
+SELECT W1.employee_name, W1.company_name, W1.salary
+FROM Works W1
+WHERE W1.salary > (
+    SELECT AVG(W2.salary)
+    FROM Works W2
+    WHERE W2.company_name = W1.company_name
+);
+
+-- e. Find the company that has the smallest payroll.
+SELECT W.company_name
+FROM Works W
+GROUP BY W.company_name
+ORDER BY SUM(W.salary) ASC
+LIMIT 1;
